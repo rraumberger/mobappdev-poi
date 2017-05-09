@@ -13,14 +13,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button addPoi = (Button) findViewById(R.id.addPoi);
+        final Button addPoi = (Button) findViewById(R.id.btnAddPoi);
         addPoi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 intent(NewPoiActivity.class);
             }
         });
 
-        final Button myPoi = (Button) findViewById(R.id.myPoi);
+        final Button myPoi = (Button) findViewById(R.id.btnAllPoi);
         myPoi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 intent(AllPoiActivity.class);

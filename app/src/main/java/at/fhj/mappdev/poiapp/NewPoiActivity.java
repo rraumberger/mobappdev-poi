@@ -1,7 +1,6 @@
 package at.fhj.mappdev.poiapp;
 
 import android.Manifest;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -32,7 +31,7 @@ public class NewPoiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_poi);
 
-        final Button getGps = (Button) findViewById(R.id.getGPS);
+        final Button getGps = (Button) findViewById(R.id.fetchCoordinates);
 
         getGps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +49,7 @@ public class NewPoiActivity extends AppCompatActivity {
             }
         });
 
-        final Button save = (Button) findViewById(R.id.btnSaveNewPoi);
+        final Button save = (Button) findViewById(R.id.btnSavePoi);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,19 +61,10 @@ public class NewPoiActivity extends AppCompatActivity {
     }
 
     private void savePoi() {
-        final String gps = ((TextView) findViewById(R.id.gpsField)).getText().toString();
-        final CharSequence address = ((TextView) findViewById(R.id.addressField)).getText();
+        final String gps = ((TextView) findViewById(R.id.tfCoordinates)).getText().toString();
+        final CharSequence address = ((TextView) findViewById(R.id.tfAddress)).getText();
 
-        final SharedPreferences sharedPreferences =
-                getSharedPreferences(getString(R.string.poi_shared_prefs), MODE_PRIVATE);
-
-        final SharedPreferences.Editor prefEditor = sharedPreferences.edit();
-
-        prefEditor.putString(gps, address != null ? address.toString().trim() : "");
-
-        prefEditor.apply();
-
-        Log.i("POI", "successfully saved!");
+        PreferencesHelper.savePoi(this, gps, address);
     }
 
     private void fillAddress() {
@@ -84,10 +74,10 @@ public class NewPoiActivity extends AppCompatActivity {
                 final Geocoder geocoder = new Geocoder(NewPoiActivity.this, Locale.getDefault());
                 try {
                     if (location != null) {
-                        ((TextView) findViewById(R.id.gpsField)).setText(String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()));
+                        ((TextView) findViewById(R.id.tfCoordinates)).setText(String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()));
                         final List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
-                        final TextView addressField = (TextView) findViewById(R.id.addressField);
+                        final TextView addressField = (TextView) findViewById(R.id.tfAddress);
                         final Address address = addresses.get(0);
                         addressField.setText(address.getCountryCode() + "," + address.getPostalCode() + "," + address.getAddressLine(0));
                     }
@@ -119,7 +109,7 @@ public class NewPoiActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 if (location != null) {
-                    ((TextView) findViewById(R.id.gpsField)).setText(String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()));
+                    ((TextView) findViewById(R.id.tfCoordinates)).setText(String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()));
                 }
             }
 

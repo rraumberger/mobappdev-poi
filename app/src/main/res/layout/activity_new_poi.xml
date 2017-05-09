@@ -1,78 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="at.fhj.mappdev.poiapp.NewPoiActivity"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context="at.fhj.mappdev.poiapp.NewPoiActivity">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:gravity="fill"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp">
+    <TextView
+        android:id="@+id/lbCoordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:labelFor="@id/tfCoordinates"
+        android:text="@string/coordinates" />
 
-        <TextView
-            android:id="@+id/lbCoordinates"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/coordinates"
-            app:layout_constraintTop_toBottomOf="parent" />
+    <EditText
+        android:id="@+id/tfCoordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lbCoordinates"
+        android:hint="@string/coordinates"
+        android:inputType="text" />
 
-        <EditText
-            android:id="@+id/gpsField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/coordinates"
-            android:inputType="text"
-            android:labelFor="@id/lbCoordinates"
-            app:layout_constraintTop_toBottomOf="@+id/lbCoordinates" />
+    <Button
+        android:id="@+id/fetchCoordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tfCoordinates"
+        android:padding="25dp"
+        android:text="@string/get_gps" />
 
-        <Button
-            android:id="@+id/getGPS"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/get_gps"
-            app:layout_constraintTop_toBottomOf="@+id/gpsField" />
+    <EditText
+        android:id="@+id/tfAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lbAddress"
+        android:hint="@string/address"
+        android:inputType="textPostalAddress" />
 
-        <TextView
-            android:id="@+id/lbAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/address"
-            app:layout_constraintTop_toBottomOf="@+id/getGPS" />
+    <TextView
+        android:id="@+id/lbAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fetchCoordinates"
+        android:labelFor="@id/tfAddress"
+        android:layout_marginTop="50dp"
+        android:text="@string/address" />
 
-        <EditText
-            android:id="@+id/addressField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:labelFor="@id/lbAddress"
-            app:layout_constraintTop_toBottomOf="@+id/lbAddress" />
+    <Button
+        android:id="@+id/getAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tfAddress"
+        android:padding="25dp"
+        android:text="@string/geocode" />
 
-        <Button
-            android:id="@+id/getAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/geocode"
-            app:layout_constraintTop_toBottomOf="@+id/addressField" />
+    <Button
+        android:id="@+id/btnSavePoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="25dp"
+        android:text="@string/save" />
 
-        <Button
-            android:id="@+id/btnSaveNewPoi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save"
-            app:layout_constraintTop_toBottomOf="@+id/getAddress" />
-
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</android.widget.RelativeLayout>
